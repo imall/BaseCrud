@@ -1,3 +1,6 @@
+using BaseCrud.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace BaseCrud
 {
     public class Program
@@ -8,6 +11,11 @@ namespace BaseCrud
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            var connectionString = builder.Configuration.GetConnectionString("CmsContext");
+            builder.Services.AddDbContext<CmsContext>(options => options.UseSqlServer(connectionString));
+
+
 
             var app = builder.Build();
 
